@@ -1,0 +1,16 @@
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\bin\Debug\net8.0\Utilities.deps.json
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\bin\Debug\net8.0\Utilities.dll
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\bin\Debug\net8.0\Utilities.pdb
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\bin\Debug\net8.0\Entities.dll
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\bin\Debug\net8.0\Entities.pdb
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.csproj.AssemblyReference.cache
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.AssemblyInfoInputs.cache
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.AssemblyInfo.cs
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.csproj.CoreCompileInputs.cache
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.sourcelink.json
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.csproj.Up2Date
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.dll
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\refint\Utilities.dll
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\Utilities.pdb
+C:\Users\bugra\OneDrive\Masaüstü\projeler\AIChatCore\back-net-apı\Utilities\obj\Debug\net8.0\ref\Utilities.dll

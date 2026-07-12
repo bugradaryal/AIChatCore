@@ -1,0 +1,46 @@
+#headerbox{
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+  padding: 1.5em;
+}
+
+#mainbox{
+  width: auto;
+  height: auto;
+  flex: 1;
+  display: flex;
+}
+
+#messagelistbox{
+  width: auto;
+  margin: 0 1em;
+  background-color: gray;
+  height: 85%;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  padding: 2em 3em;
+    border-bottom: 0.2em solid rgb(30,30,30);
+}
+#messagesendbox{
+  width: auto;
+  margin: 0 1em;
+  background-color: gray;
+  height: 15%;
+  padding: 2em;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+#copyright{
+  width: auto;
+  padding: 1em;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+#copyright p{
+  color: white;
+}
