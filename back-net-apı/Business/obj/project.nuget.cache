@@ -1,10 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "iNvqxOA/eTU=",
+  "dgSpecHash": "EQr8s/hSlqE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\bugra\\Desktop\\AIChatCore\\back-net-apı\\Business\\Business.csproj",
+  "projectFilePath": "C:\\Users\\bugra\\OneDrive\\Masaüstü\\AIChatCore\\back-net-apı\\Business\\Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bugra\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.channels\\0.14.0\\elastic.channels.0.14.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.commonschema\\9.0.0\\elastic.commonschema.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.commonschema.serilog\\9.0.0\\elastic.commonschema.serilog.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.ingest.elasticsearch\\0.14.0\\elastic.ingest.elasticsearch.0.14.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.ingest.elasticsearch.commonschema\\9.0.0\\elastic.ingest.elasticsearch.commonschema.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.ingest.transport\\0.14.0\\elastic.ingest.transport.0.14.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.serilog.sinks\\9.0.0\\elastic.serilog.sinks.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.transport\\0.10.0\\elastic.transport.0.10.0.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\microsoft.aspnetcore.http\\2.3.11\\microsoft.aspnetcore.http.2.3.11.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.10\\microsoft.aspnetcore.http.abstractions.2.3.10.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.9\\microsoft.aspnetcore.http.features.2.3.9.nupkg.sha512",
@@ -54,7 +62,8 @@
     "C:\\Users\\bugra\\.nuget\\packages\\system.memory.data\\10.0.3\\system.memory.data.10.0.3.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\system.net.serversentevents\\10.0.2\\system.net.serversentevents.10.0.2.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\system.text.encodings.web\\10.0.3\\system.text.encodings.web.10.0.3.nupkg.sha512",
-    "C:\\Users\\bugra\\.nuget\\packages\\system.text.json\\10.0.3\\system.text.json.10.0.3.nupkg.sha512"
+    "C:\\Users\\bugra\\.nuget\\packages\\system.text.json\\10.0.3\\system.text.json.10.0.3.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

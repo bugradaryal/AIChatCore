@@ -5,6 +5,7 @@ using DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace API.Controllers
 {
@@ -27,6 +28,7 @@ namespace API.Controllers
         }
 
         [HttpPost("SendMessage")]
+        [EnableRateLimiting("chat")]
         public async Task<IActionResult> SendMessage([FromBody] DTOSendMessage sendMessage)
         {
             var result = await _messageServices.SendMessageAsync(sendMessage);

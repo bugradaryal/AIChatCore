@@ -1,10 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "KH0ouxx2+xM=",
+  "dgSpecHash": "bGMi3HkHtwk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\bugra\\Desktop\\AIChatCore\\back-net-apı\\Utilities\\Utilities.csproj",
+  "projectFilePath": "C:\\Users\\bugra\\OneDrive\\Masaüstü\\AIChatCore\\back-net-apı\\Utilities\\Utilities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bugra\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.channels\\0.14.0\\elastic.channels.0.14.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.commonschema\\9.0.0\\elastic.commonschema.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.commonschema.serilog\\9.0.0\\elastic.commonschema.serilog.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.ingest.elasticsearch\\0.14.0\\elastic.ingest.elasticsearch.0.14.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.ingest.elasticsearch.commonschema\\9.0.0\\elastic.ingest.elasticsearch.commonschema.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.ingest.transport\\0.14.0\\elastic.ingest.transport.0.14.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.serilog.sinks\\9.0.0\\elastic.serilog.sinks.9.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\elastic.transport\\0.10.0\\elastic.transport.0.10.0.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\microsoft.aspnetcore.http\\2.3.11\\microsoft.aspnetcore.http.2.3.11.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.10\\microsoft.aspnetcore.http.abstractions.2.3.10.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.9\\microsoft.aspnetcore.http.features.2.3.9.nupkg.sha512",
@@ -50,16 +58,15 @@
     "C:\\Users\\bugra\\.nuget\\packages\\system.diagnostics.diagnosticsource\\10.0.0\\system.diagnostics.diagnosticsource.10.0.0.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\system.io.pipelines\\10.0.0\\system.io.pipelines.10.0.0.nupkg.sha512",
     "C:\\Users\\bugra\\.nuget\\packages\\system.text.encodings.web\\10.0.0\\system.text.encodings.web.10.0.0.nupkg.sha512",
-    "C:\\Users\\bugra\\.nuget\\packages\\system.text.json\\10.0.0\\system.text.json.10.0.0.nupkg.sha512"
+    "C:\\Users\\bugra\\.nuget\\packages\\system.text.json\\10.0.0\\system.text.json.10.0.0.nupkg.sha512",
+    "C:\\Users\\bugra\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1903",
       "level": "Warning",
-      "message": "Package 'AutoMapper' 13.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
-      "projectPath": "C:\\Users\\bugra\\Desktop\\AIChatCore\\back-net-apı\\Utilities\\Utilities.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\bugra\\Desktop\\AIChatCore\\back-net-apı\\Utilities\\Utilities.csproj",
+      "message": "Package 'AutoMapper' 13.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net8.0"

@@ -1,6 +1,7 @@
 using Business.Concrete;
 using DataAccess;
 using DataAccess.Concrete;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using OpenAI.Chat;
@@ -14,9 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers().AddNewtonsoftJson();
-builder.Host.UseSerilog();
 builder.Services.Configure<Entities.Configuration.SecurityKey>(builder.Configuration.GetSection("SecurityKey"));
 builder.Services.Configure<Entities.Configuration.OpenAIKey>(builder.Configuration.GetSection("OpenAIKey"));
+
+SerilogConfig.ConfigureLogging(builder.Configuration);
+builder.Host.UseSerilog();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DefaultCorsPolicy", policy =>
@@ -33,13 +36,23 @@ builder.Services.AddDbContext<DataDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     );
 });
-builder.WebHost.ConfigureKestrel(options =>
+if (builder.Environment.EnvironmentName == "Docker")
 {
-    options.ListenAnyIP(7077, listenOptions =>
+    builder.WebHost.ConfigureKestrel(options =>
     {
-        listenOptions.UseHttps();
+        options.ListenAnyIP(8080);
     });
-});
+}
+else
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(7077, listenOptions =>
+        {
+            listenOptions.UseHttps();
+        });
+    });
+}
 
 builder.Services.Scan(scan => scan
     .FromAssemblies(
@@ -61,7 +74,16 @@ builder.Services.AddSingleton(sp =>
         apiKey: builder.Configuration["OpenAIKey:AIKey"]
     );
 });
-SerilogConfig.ConfigureLogging();
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("chat", opt =>
+    {
+        opt.PermitLimit = 10;
+        opt.Window = TimeSpan.FromMinutes(1);
+        opt.QueueLimit = 0;
+    });
+});
 
 var app = builder.Build();
 
@@ -73,10 +95,13 @@ app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), appBuild
     appBuilder.UseMiddleware<ApiKeyMiddleware>();
 });
 
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseRateLimiter();
 app.Run();
