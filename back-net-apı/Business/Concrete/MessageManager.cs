@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Entities;
 using DTO;
 using System.Collections.Immutable;
-using Utilitys.Mapper;
+using Utilities.Mapper;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Entities.Enums;
 using OpenAI.Chat;
@@ -21,20 +21,18 @@ namespace Business.Concrete
     {
         private readonly IGenericRepository<UserMessage> _genericUser;
         private readonly IGenericRepository<AiMessage> _genericAi;
-        private readonly IGenericRepository<Session> _genericSession;
         private readonly IMessageRepository _messageRepository;
-        private readonly ILogRepository _logRepository;
         private readonly IMapper _mapper;
         private readonly ChatClient _client;
-        public MessageManager(IMessageRepository messageRepository, IMapper mapper, IGenericRepository<UserMessage> genericUser, ChatClient client, IGenericRepository<AiMessage> genericAi, ILogRepository logRepository, IGenericRepository<Session> genericSession)
+        private readonly ISessionServices _sessionServices;
+        public MessageManager(IMessageRepository messageRepository, IMapper mapper, IGenericRepository<UserMessage> genericUser, ChatClient client, IGenericRepository<AiMessage> genericAi, ISessionServices sessionServices)
         {
             _messageRepository = messageRepository;
             _mapper = mapper;
             _genericUser = genericUser;
             _client = client;
             _genericAi = genericAi;
-            _logRepository = logRepository;
-            _genericSession = genericSession;
+            _sessionServices = sessionServices;
         }
 
         public async Task<DTOChatHistoryResult> GetChatHistoryAsync(int sessionId)
@@ -46,18 +44,18 @@ namespace Business.Concrete
                 new DTOChatHistory
                 {
                     message = x.user_message,
-                    role = Roles.user,
+                    role = ERoles.user,
                     date = x.user_message_date
                 },
                 new DTOChatHistory
                 {
                     message = x.aiMessage?.ai_message,
-                    role = Roles.assistant,
+                    role = ERoles.assistant,
                     date = x.aiMessage?.ai_message_date ?? DateTime.MinValue
                 }
             }).ToList();
 
-            var session = await _genericSession.GetValue(sessionId);
+            var session = await _sessionServices.GetValueSessionAsync(sessionId);
 
             return new DTOChatHistoryResult
             {
@@ -72,7 +70,7 @@ namespace Business.Concrete
             string? title = null;
             ICollection<ChatMessage> messages = new List<ChatMessage>();
 
-            if (sendMessage.sessionId is null)
+            if (sendMessage.sessionId is null || await _sessionServices.SessionAnyAsync(sendMessage.sessionId.Value)!)
             {
                 // Yeni session — title üret, DB'ye kaydet
                 var prompt = $"Bu mesaj için en fazla 5 kelimelik kısa bir başlık üret: \"{sendMessage.message.Substring(0, Math.Min(300, sendMessage.message.Length))}\"";
@@ -80,24 +78,19 @@ namespace Business.Concrete
                 title = titleCompletion.Content[0].Text.Trim();
 
                 var session = new Session { title = title, created_date = DateTime.UtcNow };
-                await _genericSession.Add(session);
+                await _sessionServices.AddSessionAsync(session);
 
                 sessionId = session.id;
             }
             else
             {
-                // Var olan session — geçmişi çek
                 sessionId = sendMessage.sessionId.Value;
-                if(await _genericSession.Any(sessionId))
-                {
-
-                }
                 var historyResult = await GetChatHistoryAsync(sessionId);
 
                 messages = historyResult.History
                     .Select(x =>
                     {
-                        if (x.role == Roles.user)
+                        if (x.role == ERoles.user)
                             return (ChatMessage)new UserChatMessage(x.message!);
                         else
                             return (ChatMessage)new AssistantChatMessage(x.message!);
@@ -124,19 +117,9 @@ namespace Business.Concrete
             {
                 ai_message = aiMessage.ai_message,
                 ai_message_date = aiMessage.ai_message_date,
-                sessionId = sessionId,
                 title = title
             };
         }
 
-        public async Task DeleteSessionAsync(int sessionId)
-        {
-            await _genericSession.Delete(sessionId);
-        }
-
-        public async Task<ICollection<Session>> GetSectionListAsync()
-        {
-            return await _genericSession.GetAll();
-        }
     }
 }

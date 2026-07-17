@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.Internal;
 
-namespace Utilitys.Mapper
+namespace Utilities.Mapper
 {
-    public class Mapper : Utilitys.Mapper.IMapper
+    public class Mapper : Utilities.Mapper.IMapper
     {
         public static List<TypePair> typePairs = new List<TypePair>();
         private AutoMapper.IMapper _mapper;

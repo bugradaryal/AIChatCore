@@ -10,7 +10,6 @@ namespace DTO
     {
         public string? ai_message { get; set; }
         public DateTime ai_message_date { get; set; }
-        public int sessionId { get; set; }
         public string? title { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface ILogRepository
     {
-        Task<string?> GetLatestTitleAsync();
+        Task AddLogAsync(Log log);
     }
 }

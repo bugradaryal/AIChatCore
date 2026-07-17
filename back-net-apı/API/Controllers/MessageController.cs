@@ -13,9 +13,11 @@ namespace API.Controllers
     public class MessageController : ControllerBase
     {
         public readonly IMessageServices _messageServices;
-        public MessageController(IMessageServices messageManager)
+        public readonly ISessionServices _sessionServices;
+        public MessageController(IMessageServices messageManager, ISessionServices sessionServices)
         {
             _messageServices = messageManager;
+            _sessionServices = sessionServices;
         }
 
         [HttpPost("MessageHistory")]
@@ -34,14 +36,14 @@ namespace API.Controllers
         [HttpDelete("DeleteSession/{sessionId}")]
         public async Task<IActionResult> DeleteSession([FromRoute] int sessionId)
         {
-            await _messageServices.DeleteSessionAsync(sessionId);
+            await _sessionServices.DeleteSessionAsync(sessionId);
             return Ok();
         }
 
         [HttpPost("GetSectionList")]
         public async Task<IActionResult> GetSectionList()
         {
-            return Ok(await _messageServices.GetSectionListAsync());
+            return Ok(await _sessionServices.GetSectionListAsync());
         }
     }
 }

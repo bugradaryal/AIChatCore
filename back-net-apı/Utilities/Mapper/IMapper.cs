@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utilitys.Mapper
+namespace Utilities.Mapper
 {
     public interface IMapper
     {

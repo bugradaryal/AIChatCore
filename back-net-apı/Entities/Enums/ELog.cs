@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Concrete
+namespace Entities.Enums
 {
-    internal class LogsManager
+    public enum ELog
     {
+        Info,
+        Warn,
+        Error,
+        Fatal,
     }
 }

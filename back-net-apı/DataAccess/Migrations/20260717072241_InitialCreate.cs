@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -13,6 +12,24 @@ namespace DataAccess.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "logs",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    LogMessage = table.Column<string>(type: "text", nullable: false),
+                    LogLevel = table.Column<int>(type: "integer", nullable: false),
+                    Target = table.Column<string>(type: "text", nullable: true, defaultValue: "Unknown"),
+                    ExceptionDetail = table.Column<string>(type: "text", nullable: true),
+                    session_id = table.Column<int>(type: "integer", nullable: true),
+                    log_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_logs", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "sessions",
                 columns: table => new
@@ -69,50 +86,11 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "logs",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ip_adress = table.Column<IPAddress>(type: "inet", nullable: true),
-                    UserMessageId = table.Column<int>(type: "integer", nullable: true),
-                    AiMessageId = table.Column<int>(type: "integer", nullable: true),
-                    date = table.Column<DateTime>(type: "timestamptz", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    prop = table.Column<string>(type: "text", nullable: true, defaultValue: "Unknown")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_logs", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_logs_aiMessages_AiMessageId",
-                        column: x => x.AiMessageId,
-                        principalTable: "aiMessages",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_logs_userMessages_UserMessageId",
-                        column: x => x.UserMessageId,
-                        principalTable: "userMessages",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_aiMessages_UserMessageId",
                 table: "aiMessages",
                 column: "UserMessageId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_logs_AiMessageId",
-                table: "logs",
-                column: "AiMessageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_logs_UserMessageId",
-                table: "logs",
-                column: "UserMessageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userMessages_SessionId",
@@ -124,10 +102,10 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "logs");
+                name: "aiMessages");
 
             migrationBuilder.DropTable(
-                name: "aiMessages");
+                name: "logs");
 
             migrationBuilder.DropTable(
                 name: "userMessages");

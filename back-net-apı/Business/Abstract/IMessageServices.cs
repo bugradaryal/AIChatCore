@@ -12,7 +12,5 @@ namespace Business.Abstract
     {
         Task<DTOChatHistoryResult> GetChatHistoryAsync(int sessionId);
         Task<DTOAiResponse> SendMessageAsync(DTOSendMessage sendMessage);
-        Task DeleteSessionAsync(int sessionId);
-        Task<ICollection<Session>> GetSectionListAsync();
     }
 }

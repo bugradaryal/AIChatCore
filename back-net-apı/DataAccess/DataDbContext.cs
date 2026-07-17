@@ -16,7 +16,7 @@ namespace DataAccess
 
         public DbSet<AiMessage> aiMessages { get; set; }
         public DbSet<UserMessage> userMessages { get; set; }
-        public DbSet<Logs> logs { get; set; }
+        public DbSet<Log> logs { get; set; }
         public DbSet<Session> sessions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,12 +34,12 @@ namespace DataAccess
             modelBuilder.Entity<UserMessage>().Property(x=>x.user_message_date).HasColumnType("timestamptz");
             modelBuilder.Entity<UserMessage>().Property(x => x.user_message_date).HasDefaultValueSql("CURRENT_TIMESTAMP");
             //---------------------------------------------------------------------------------
-            modelBuilder.Entity<Logs>().HasKey(x => x.id);
-            modelBuilder.Entity<Logs>().Property(x => x.ip_adress).HasColumnType("inet");
-            modelBuilder.Entity<Logs>().Property(x => x.date).HasColumnType("timestamptz");
-            modelBuilder.Entity<Logs>().Property(x => x.date).HasDefaultValueSql("CURRENT_TIMESTAMP");
-            modelBuilder.Entity<Logs>().Property(x => x.prop).HasColumnType("text");
-            modelBuilder.Entity<Logs>().Property(x => x.prop).HasDefaultValue("Unknown");
+            modelBuilder.Entity<Log>().HasKey(x => x.id);
+            modelBuilder.Entity<Log>().Property(x => x.LogMessage).HasColumnType("text");
+            modelBuilder.Entity<Log>().Property(x => x.LogLevel).IsRequired();
+            modelBuilder.Entity<Log>().Property(x => x.Target).HasColumnType("text").HasDefaultValue("Unknown");
+            modelBuilder.Entity<Log>().Property(x => x.ExceptionDetail).HasColumnType("text");
+            modelBuilder.Entity<Log>().Property(x => x.log_date).HasDefaultValueSql("CURRENT_TIMESTAMP");
             //---------------------------------------------------------------------------------
             modelBuilder.Entity<Session>().HasKey(x => x.id);
             modelBuilder.Entity<Session>().Property(x => x.title).HasColumnType("text");
@@ -56,18 +56,6 @@ namespace DataAccess
                 .HasOne(x => x.aiMessage)
                 .WithOne(x => x.userMessage)
                 .HasForeignKey<AiMessage>(x => x.UserMessageId);
-
-            modelBuilder.Entity<Logs>()
-                .HasOne<UserMessage>()
-                .WithMany()
-                .HasForeignKey(x => x.UserMessageId)
-                .OnDelete(DeleteBehavior.SetNull);
-
-            modelBuilder.Entity<Logs>()
-                .HasOne<AiMessage>()
-                .WithMany()
-                .HasForeignKey(x => x.AiMessageId)
-                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
