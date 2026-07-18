@@ -27,6 +27,15 @@ namespace DataAccess.Concrete
                             .OrderBy(u => u.user_message_date)
                             .ToListAsync();
         }
+        public async Task<ICollection<UserMessage>> AllChatHistory()
+        {
+            return await _dbContext.userMessages
+                            .Include(u => u.aiMessage)
+                            .OrderByDescending(u => u.user_message_date)
+                            .Take(20)
+                            .OrderBy(u => u.user_message_date)
+                            .ToListAsync();
+        }
         public async Task<ICollection<Session>> GetRecentSessionsAsync()
         {
             var sessions = await _dbContext.sessions

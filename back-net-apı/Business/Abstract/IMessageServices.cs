@@ -12,5 +12,6 @@ namespace Business.Abstract
     {
         Task<DTOChatHistoryResult> GetChatHistoryAsync(int sessionId);
         Task<DTOAiResponse> SendMessageAsync(DTOSendMessage sendMessage);
+        Task<ICollection<DTOChatHistory>> GetAllChatHistoryAsync();
     }
 }

@@ -15,16 +15,22 @@ public class ApiKeyMiddleware
 
     public async Task InvokeAsync(HttpContext context, IConfiguration configuration)
     {
+        if (context.Request.Method == HttpMethods.Options)
+        {
+            await _next(context);
+            return;
+        }
+
         if (!context.Request.Headers.TryGetValue(APIKEY_HEADER_NAME, out var extractedApiKey))
         {
-            context.Response.StatusCode = 401; // Unauthorized
+            context.Response.StatusCode = 401;
             await context.Response.WriteAsync("API Key gerekli.");
             return;
         }
 
-        if (!_key.Equals(extractedApiKey))
+        if (!_key.Equals(extractedApiKey.ToString()))
         {
-            context.Response.StatusCode = 403; // Forbidden
+            context.Response.StatusCode = 403;
             await context.Response.WriteAsync("Geçersiz API Key.");
             return;
         }

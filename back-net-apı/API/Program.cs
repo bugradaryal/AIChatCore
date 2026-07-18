@@ -20,12 +20,14 @@ builder.Services.Configure<Entities.Configuration.OpenAIKey>(builder.Configurati
 
 SerilogConfig.ConfigureLogging(builder.Configuration);
 builder.Host.UseSerilog();
+var corsOrigins = builder.Configuration.GetSection("CORS:Origin").Get<string[]>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DefaultCorsPolicy", policy =>
     {
         policy
-            .WithOrigins(builder.Configuration["CORS:Origin"])
+            .WithOrigins(corsOrigins)
             .AllowAnyMethod()
             .AllowAnyHeader();
     });
@@ -36,23 +38,19 @@ builder.Services.AddDbContext<DataDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     );
 });
-if (builder.Environment.EnvironmentName == "Docker")
+
+builder.WebHost.ConfigureKestrel(options =>
 {
-    builder.WebHost.ConfigureKestrel(options =>
-    {
-        options.ListenAnyIP(8080);
-    });
-}
-else
-{
-    builder.WebHost.ConfigureKestrel(options =>
+    if (!builder.Environment.IsEnvironment("Docker"))
     {
         options.ListenAnyIP(7077, listenOptions =>
         {
             listenOptions.UseHttps();
         });
-    });
-}
+    }
+
+    options.ListenAnyIP(8080);
+});
 
 builder.Services.Scan(scan => scan
     .FromAssemblies(
@@ -86,16 +84,20 @@ builder.Services.AddRateLimiter(options =>
 });
 
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DataDbContext>();
+    dbContext.Database.Migrate();
+}
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
-
+app.UseCors("DefaultCorsPolicy");
 app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), appBuilder =>
 {
     appBuilder.UseMiddleware<ApiKeyMiddleware>();
 });
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Docker"))
 {
     app.UseHttpsRedirection();
 }

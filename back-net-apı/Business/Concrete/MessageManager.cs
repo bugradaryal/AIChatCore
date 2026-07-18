@@ -34,7 +34,29 @@ namespace Business.Concrete
             _genericAi = genericAi;
             _sessionServices = sessionServices;
         }
+        public async Task<ICollection<DTOChatHistory>> GetAllChatHistoryAsync()
+        {
+            var result = await _messageRepository.AllChatHistory();
 
+            var dtoList = result.SelectMany(x => new[]
+            {
+                new DTOChatHistory
+                {
+                    id = x.id,
+                    message = x.user_message,
+                    role = ERoles.user,
+                    date = x.user_message_date
+                },
+                new DTOChatHistory
+                {
+                    id = x.aiMessage?.id,
+                    message = x.aiMessage?.ai_message,
+                    role = ERoles.assistant,
+                    date = x.aiMessage?.ai_message_date ?? DateTime.MinValue
+                }
+            }).ToList();
+            return dtoList;
+        }
         public async Task<DTOChatHistoryResult> GetChatHistoryAsync(int sessionId)
         {
             var result = await _messageRepository.ChatHistory(sessionId);
@@ -43,12 +65,14 @@ namespace Business.Concrete
             {
                 new DTOChatHistory
                 {
+                    id = x.id,
                     message = x.user_message,
                     role = ERoles.user,
                     date = x.user_message_date
                 },
                 new DTOChatHistory
                 {
+                    id = x.aiMessage?.id,
                     message = x.aiMessage?.ai_message,
                     role = ERoles.assistant,
                     date = x.aiMessage?.ai_message_date ?? DateTime.MinValue
@@ -70,7 +94,7 @@ namespace Business.Concrete
             string? title = null;
             ICollection<ChatMessage> messages = new List<ChatMessage>();
 
-            if (sendMessage.sessionId is null || await _sessionServices.SessionAnyAsync(sendMessage.sessionId.Value)!)
+            if (!sendMessage.sessionId.HasValue || !await _sessionServices.SessionAnyAsync(sendMessage.sessionId.Value))
             {
                 // Yeni session — title üret, DB'ye kaydet
                 var prompt = $"Bu mesaj için en fazla 5 kelimelik kısa bir başlık üret: \"{sendMessage.message.Substring(0, Math.Min(300, sendMessage.message.Length))}\"";
@@ -115,6 +139,9 @@ namespace Business.Concrete
 
             return new DTOAiResponse
             {
+                user_id = userMessage.id,
+                ai_id = aiMessage.id,
+                session_id = sessionId,
                 ai_message = aiMessage.ai_message,
                 ai_message_date = aiMessage.ai_message_date,
                 title = title

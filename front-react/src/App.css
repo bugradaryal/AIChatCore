@@ -2,9 +2,19 @@
   display: flex;
   justify-content: space-between;
   width: auto;
-  padding: 1.5em;
+  padding: 1em;
 }
-
+#headerbuttons{
+  display: flex;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+#headerlogo{
+    width: auto;
+    height: auto;
+}
 #mainbox{
   width: auto;
   height: auto;

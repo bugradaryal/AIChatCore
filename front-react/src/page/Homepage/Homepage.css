@@ -5,57 +5,66 @@ body{
 }
 #bodypage{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 1;
     height: auto;
     width: auto;
+    margin: 0 1em;
 }
-#messagelistbox{
-  width: auto;
-  margin: 0 1em;
+#proplistbox{
+  width: 18%;
+  height: 85vh;
   background-color: rgb(255, 255, 255);
-  height: 93%;
+  border-bottom-left-radius: 1em;
   border-top-left-radius: 1em;
-  border-top-right-radius: 1em;
-  padding: 2em 3em;
-  border-bottom: 0.2em solid rgb(30,30,30);
+  margin: 0;
+}
+#titlelist{
+  width: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  justify-content: center;
+  padding: 2em 1em;
+  margin: 0;
+  gap: 0.5em;
+  overflow-y: auto;
 }
-#messagebox{
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-    padding-bottom: 1em;
-    border-bottom: 2px solid rgb(30,30,30);
-    border-bottom-style: dashed;
-}
-#messagebox p{
-    color: rgb(30,30,30);
-    font-size: 1em;
-    font-weight: 500;
-}
-#messageboxicon{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-}
-#messagesendbox{
-  width: auto;
-  margin: 0 1em;
-  background-color: rgb(255, 255, 255);
-  height: 9%;
-  border-bottom-left-radius: 1em;
-  border-bottom-right-radius: 1em;
+#titlebutton{
+  width: 100%;
+  height: auto;
+  margin: 0;
+  text-transform: none;
+  color: black;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start !important;
+  text-align: left;
+  align-items: flex-start;
+  font-size: small;
+  font-weight: bold;
 }
 
-#multiboxsector{
-    display:flex;
-    justify-Content:center;
-    margin-bottom: 1em;
+#buttonstitle{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5em;
+}
+
+#deletebutton{
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#deletebutton:active {
+  color: rgb(195, 195, 195);
 }

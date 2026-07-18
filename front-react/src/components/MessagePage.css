@@ -1,0 +1,81 @@
+#listbox{
+  width: 82%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+#messagelistbox{
+  width: auto;
+  margin: 0;
+  border-left: 0.2em solid rgb(30,30,30);
+  background-color: rgb(255, 255, 255);
+  height: 91%;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  padding: 2em 3em;
+  border-bottom: 0.2em solid rgb(30,30,30);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow-y: auto;
+  box-sizing: border-box;
+  min-height: 0;
+}
+#messagesendbox{
+  width: auto;
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  height: 9%;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 0;
+  border-left: 0.2em solid rgb(30,30,30);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#messagebox{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    padding-bottom: 1em;
+    border-bottom: 0.2em solid rgb(30,30,30);
+    border-bottom-style: dashed;
+}
+#messagebox p{
+    color: rgb(30,30,30);
+    font-size: 1em;
+    font-weight: 500;
+}
+#messageboxicon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+#multiboxsector{
+    display:flex;
+    justify-Content:center;
+    margin-bottom: 1em;
+}
+#messagesector{
+    display:flex;
+    flex-direction: column;
+    justify-content:left;
+    width: 100%;
+    height: auto;
+}
+#titlediv{
+    width: auto;
+    height: auto;
+    padding: 0.1em;
+    border-bottom: 0.1em solid rgb(30,30,30);
+    background-color: rgb(255, 255, 255);
+    padding: 1em;
+    border-left: 0.2em solid rgb(30,30,30);
+    border-top-right-radius: 1em;
+}
+#titlediv b{
+    color: black;
+    font-size: larger;
+}

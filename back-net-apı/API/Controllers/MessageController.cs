@@ -20,7 +20,11 @@ namespace API.Controllers
             _messageServices = messageManager;
             _sessionServices = sessionServices;
         }
-
+        [HttpPost("GetAllMessageHistory")]
+        public async Task<IActionResult> GetAllMessageHistory()
+        {
+            return Ok(await _messageServices.GetAllChatHistoryAsync());
+        }
         [HttpPost("MessageHistory")]
         public async Task<IActionResult> MessageHistory([FromBody] int sessionId)
         {

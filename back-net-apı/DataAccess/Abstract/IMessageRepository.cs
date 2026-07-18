@@ -11,5 +11,6 @@ namespace DataAccess.Abstract
     {
         Task<ICollection<UserMessage>> ChatHistory(int sessionId);
         Task<ICollection<Session>> GetRecentSessionsAsync();
+        Task<ICollection<UserMessage>> AllChatHistory();
     }
 }

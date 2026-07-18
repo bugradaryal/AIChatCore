@@ -10,6 +10,7 @@ namespace DTO
 {
     public class DTOChatHistory
     {
+        public int? id { get; set; }
         public string? message { get; set; }
         public ERoles role { get; set; }
         public DateTime date { get; set; }
